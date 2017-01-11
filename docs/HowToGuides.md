@@ -6,11 +6,14 @@ Big PRs (i.e. PRs touching more than 100 lines) are hard to review.
 Using the _multi-step PR_ format explained below allows the review to be done incrementally.
 
 1. Dev creates the PR branch consisting of a series of commits corresponding to a sequence of logical steps, 
-   each step advancing the code base a step towards the end goal of the PR. The build should pass at each step.
+   each step advancing the code base towards the end goal of the PR. The build must pass at each step 
+   
+   > Build-breaking commits in the version history hinder the ability to use `git bisect` for locating bugs.
+   
    <details>
    <summary>Instructions</summary>
    
-   * There Ideal approach for creating a multi-step commit sequence: 
+   * The ideal approach for creating a multi-step commit sequence: 
      * Plan the PR as a sequence of logical steps.
      * Implement each step, committing each step as a separate commit. 
        * Write detailed commit messages as if you were explaining your commit to a future developer.
@@ -25,36 +28,31 @@ Using the _multi-step PR_ format explained below allows the review to be done in
        achieved in the ideal approach given above.
    </details>
    
-1. When the PR is ready for reivew, dev posts a summary of commits using the CanIHasReview tool.
-   (created by [@pyokagan](https://github.com/pyokagan/))  
+1. When the PR is ready for review, dev posts a summary of commits using the 
+   [CanIHasReview tool](https://github.com/pyokagan/canihasreview/).
+    
     <details>
        <summary>Instructions</summary>
        
-       * Go to `https://canihasreview.herokuapp.com/se-edu/addressbook-level4/pull/237` (change the URL to fit your PR).
-       * Click `Submit new iteration` button. It will post a summary of the PR similar to the below:
-       
-       > 
-       > # v8
-       > 
-       > @YourID submitted v8 for review.
-       > 
-       > * [v8 1/3] [make Person mutable ](https://github.com/se-edu/addressbook-level4/pull/209/commits/8a4e6347e347ba0a9130573715d7d5f09ed40ee6)
-       > * [v8 2/3] [create isAnyPresent() method in CollectionUtil ](https://github.com/se-edu/addressbook-level4/pull/209/commits/478ebafae4d3eb481484b0157d5f59afc1ac24ce)
-       > * [v8 3/3] [teach classes in Model to execute edit ](https://github.com/se-edu/addressbook-level4/pull/209/commits/964bc4dcf12332ce1815ca9c07bdc22f988b7825)
-       > 
+       1. Navigate to your PR. e.g. `https://github.com/se-edu/addressbook-level4/pull/237`.
+       2. Replace github.com in the PR URL with canihasreview.herokuapp.com. The resulting URL should be 
+          something like `https://canihasreview.herokuapp.com/se-edu/addressbook-level4/pull/237`.
+       3. Click `Submit new iteration` button. It will post a summary of the PR similar to 
+          [this example](https://github.com/se-edu/addressbook-level4/pull/209#issuecomment-270905049)
     </details>
        
 1. The reviewer reviews one commit at a time, starting with the earliest commit. If the early commits require lot 
    of changes, she can omit reviewing later commits until the early commits are updated as per review.
       
 1. After reach round of review, the dev _updates the existing commits_  (rather than add more commits)
-   according to the review comments.
+   according to the review comments. 
    
    <details>
    <summary>Instructions</summary>
    
    * Commit your changes in separate commits.
-   * Squash the new commits onto the relevant commits in the PR.
+   * Squash the new commits onto the relevant commits in the PR. New commits can remain if they introduce new
+     logical changes that were not in the previous version, or if the reviewer recommended splitting existing commits.
    * Post the summary of the new version using the same CanIHasReview tool used earlier.
    </details>
 
