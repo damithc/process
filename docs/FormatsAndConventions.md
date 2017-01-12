@@ -15,7 +15,7 @@ are not desirable.
 
 ## Commit message
 
-Every commit must have a well written commit message subject line.
+Every commit must have a well written commit message _**subject line**_.
  
 1. Limit the subject line to 50 characters
 1. Capitalize the subject line
@@ -23,7 +23,7 @@ Every commit must have a well written commit message subject line.
 1. Use the imperative mood in the subject line
    e.g. `Add README.md` rather than `Added README.md` or `Adding README.md`
 
-Commit messages for non-trivial commits should have a body giving details of the commit.
+Commit messages for non-trivial commits should have a _**body**_ giving details of the commit.
  
 1. Separate subject from body with a blank line
 1. Wrap the body at 72 characters
