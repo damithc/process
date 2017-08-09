@@ -31,25 +31,25 @@ Categories of style rules:
 com.company.application.ui
 ```
 
-The usual convention in package names is that the prefix should be the internet domain of the server which hosts the application, but in reverse order. The suffix depends on the application and the grouping. `e.g. com.microsoft.word.api, code.microsoft.word.recovery:` the first package will contain the API classes of word and the second package will contain the classes which handle the document recovery logic.
+> [More on package naming](https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html)
 
 For school projects, the root name of the package should be your group name or project name followed by logical group names.` e.g. todobuddy.ui, todobuddy.file etc`. 
 
 >Rationale: Your code is not officially ‘*produced by NUS*’, therefore do not use `edu.nus.comp.*` or anything similar.
 
-**2. :star: Names representing classes or enum types must be nouns and written in PascalCase (mixed case starting with upper case).**
+**2. :star: Class/enum names must be nouns and written in PascalCase.**
 
 ```java
 Line, AudioSystem
 ```
  
-**3. :star: Variable names must be in camelCase (mixed case starting with lower case).**
+**3. :star: Variable names must be in camelCase.**
 
 ```java
 line, audioSystem
 ```
 
-**4. :star: Names representing constants (final variables) or enum constants must be all uppercase using underscore to separate words.**
+**4. :star: Constant names must be all uppercase using underscore to separate words.**
 
 ```java
 MAX_ITERATIONS, COLOR_RED
@@ -69,7 +69,7 @@ Third part or both second and third parts can be omitted depending on what's cov
 For example, the test method `sortList_emptyList()` will test `sortList()` method for all variations of the 'empty list' 
 scenario and the test method `sortList()` will test the `sortList()` method for all scenarios.
 
-**6. :star::star: Abbreviations and acronyms should not be uppercase when used as a (OR part of a) name.**
+**6. :star::star: Abbreviations and acronyms should not be uppercase when used as a part of a name.**
 
 <table>
   <tr>
@@ -93,11 +93,13 @@ openDVDPlayer();</pre>
 
 **7. :star: All names should be written in English.**
 
-English is the preferred language for international development.
+>Rationale: The code is meant for an international audience.
 
 **8. :star::star: Variables with a large scope should have long names, variables with a small scope can have short names.**
 
-Scratch variables used for temporary storage or indices are best kept short. A programmer reading such variables should be able to assume that its value is not used outside a few lines of code. Common scratch variables for integers are `i, j, k, m, n` and for characters `c` and `d`.
+Scratch variables used for temporary storage or indices can be kept short. A programmer reading such variables should be able to assume that its value is not used outside a few lines of code. Common scratch variables for integers are `i, j, k, m, n` and for characters `c` and `d`.
+
+>Rationale: When the scope is small, the reader does not have to remember it for long.
 
 **9. :star: Boolean variables/methods should be named to sound like booleans ‘is’**
 
@@ -111,7 +113,7 @@ boolean canEvaluate();
 boolean shouldAbort = false;
 ```
 
-Setter methods for boolean variables must have set prefix as in:
+Setter methods for boolean variables must be of the form:
 
 ```java
 void setFound(boolean isFound);
@@ -363,7 +365,7 @@ default:
 
 The explicit `//Fallthrough` comment should be included whenever there is a `case` statement without a break statement. 
 
->Leaving out the `break` is a common error, and it must be made clear that it is intentional when it is not there.
+>Rationale: Leaving out the `break` is a common error, and it must be made clear that it is intentional when it is not there.
 
 **11. :star: A _try-catch_ statement should have the following form:**
 
@@ -576,7 +578,7 @@ static public double square(double a);</pre>
 <unusual> = volatile | transient 
 ```
 
->Rationale: The most important lesson here is to keep the *access* modifier as the first modifier. Of the possible modifiers, For the other modifiers, the order is less important, but it make sense to have a fixed convention.
+>Rationale: The most important point here is to keep the *access* modifier as the first modifier. The order is less important for the other modifiers, but it make sense to have a fixed convention.
 
 ### **Types**
 
@@ -646,7 +648,7 @@ for (i = 0; i < 10; i++) {
       <pre lang="java">
 public class Foo{
 
-    public int bar;
+   public int bar;
 
 }
       </pre>
@@ -654,7 +656,7 @@ public class Foo{
   </tr>
 </table>
 
->Rationale: The concept of Java information hiding and encapsulation is violated by public variables. Use private variables and access functions instead. One exception to this rule is when the class is essentially a data structure, with no behavior (*equivalent to a C++ struct*). In this case it is appropriate to make the class' instance variables public.
+>Rationale: The concept of Java information hiding and encapsulation is violated by public variables. Use private variables and access functions instead. One exception to this rule is when the class is essentially a data structure, with no behavior. In this case it is appropriate to make the class' instance variables public.
 
 **9. :star::star::star: Avoid unnecessary use of `this` with fields.**
 
@@ -713,7 +715,7 @@ for (i = 0, sum = 0; i < 100; i++)
   </tr>
 </table>
 
->Rationale: When there is only one statement in the loop body it can be written without wrapping it between `{ }`, however that is error prone and *very* strongly discouraged from using.
+>Rationale: When there is only one statement in the loop body, Java allows it to be written without wrapping it between `{ }`. However that is error prone and *very* strongly discouraged from using.
 
 ### **Conditionals**
 
@@ -738,7 +740,7 @@ if (isDone) doCleanup();</pre>
   </tr>
 </table>
 
->Rationale: This is for debugging purposes. When writing on a single line, it is not apparent whether the test is really true or not.
+>Rationale: This helps when debugging using an IDE debugger. When writing on a single line, it is not apparent whether the condition is really true or not.
 
 **12. :star: Single statement conditionals should still be wrapped by curly brackets.**
 
@@ -764,7 +766,9 @@ if (stream != null))
   </tr>
 </table>
 
-The body of the conditional should be wrapped by curly brackets irrespective of how many statements are in it to avoid error prone code.
+The body of the conditional should be wrapped by curly brackets irrespective of how many statements.
+ 
+>Rationale: Omitting braces can lead to subtle bugs.
 
 
 ## **Comments**
@@ -784,7 +788,7 @@ You MUST write header comments for all classes, public methods.
 
 **2. :star::star::star: All non-trivial private methods should carry header comments.**
 
->Rationale: Writing header comments will hep novice programmers detect abstraction problems. e.g. If it is hard to describe the method succinctly, there is something wrong with the method abstraction.
+>Rationale: Writing header comments will hep novice programmers to self-detect abstraction problems. e.g. If it is hard to describe the method succinctly, there is something wrong with the method abstraction.
 
 
 **3. :star::star: Javadoc comments should have the following form:**
@@ -794,10 +798,10 @@ You MUST write header comments for all classes, public methods.
  * Returns lateral location of the specified position.
  * If the position is unset, NaN is returned.
  *
- * @param x    X coordinate of position.
- * @param y    Y coordinate of position.
+ * @param x  X coordinate of position.
+ * @param y Y coordinate of position.
  * @param zone Zone of position.
- * @return     Lateral location.
+ * @return Lateral location.
  * @throws IllegalArgumentException  If zone is <= 0.
  */
 public double computeLocation(double x, double y, int zone)
@@ -813,7 +817,6 @@ Note in particular:
 - Subsequent `*` is aligned with the first one
 - Space after each `*`
 - Empty line between description and parameter section
-- Alignment of parameter descriptions
 - Punctuation behind each parameter description
 -No blank line between the documentation block and the method/class
 
