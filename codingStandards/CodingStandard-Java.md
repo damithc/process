@@ -33,17 +33,17 @@ com.company.application.ui
 
 The usual convention in package names is that the prefix should be the internet domain of the server which hosts the application, but in reverse order. The suffix depends on the application and the grouping. `e.g. com.microsoft.word.api, code.microsoft.word.recovery:` the first package will contain the API classes of word and the second package will contain the classes which handle the document recovery logic.
 
-However, for your projects, the root name of the package should be your group name or project name followed by logical group names.` e.g. todobuddy.ui, todobuddy.file etc`. 
+For school projects, the root name of the package should be your group name or project name followed by logical group names.` e.g. todobuddy.ui, todobuddy.file etc`. 
 
->Note: Your code is not officially ‘*produced by NUS*’, therefore do not use `edu.nus.comp.*` or anything similar.
+>Rationale: Your code is not officially ‘*produced by NUS*’, therefore do not use `edu.nus.comp.*` or anything similar.
 
-**2. :star: Names representing classes or enum types must be nouns and written in mixed case starting with upper case.**
+**2. :star: Names representing classes or enum types must be nouns and written in PascalCase (mixed case starting with upper case).**
 
 ```java
 Line, AudioSystem
 ```
  
-**3. :star: Variable names must be in mixed case starting with lower case.**
+**3. :star: Variable names must be in camelCase (mixed case starting with lower case).**
 
 ```java
 line, audioSystem
@@ -55,14 +55,13 @@ line, audioSystem
 MAX_ITERATIONS, COLOR_RED
 ```
 
-**5. :star: Names representing methods must be verbs and written in mixed case starting with lower case.**
+**5. :star: Names representing methods must be verbs and written in camelCase.**
 
 ```java
 getName(), computeTotalWidth()
 ```
 
-Underscores may be used in test method names if your test method names are long and very descriptive
-using the following three part format **`featureUnderTest_testScenario_expectedBehavior()`** 
+Underscores may be used in test method names using the following three part format **`featureUnderTest_testScenario_expectedBehavior()`** 
 
 e.g. `sortList_emptyList_exceptionThrown()` `getMember_memberNotFount_nullReturned`
 
@@ -91,24 +90,6 @@ openDVDPlayer();</pre>
   </tr>
 </table>
 
-Using all uppercase for the base name will give conflicts with the naming conventions given above. A variable of this type would have to be named `dVD` and `hTML` which is not very readable. 
-
-Another problem is illustrated in the examples above. When abbreviations/acronyms are used as part of a name, readability is seriously reduced. The word following the abbreviation/acronym does not stand out as it should.
-
-As a result, minimize usage of abbreviations/acronyms, unless the concepts they are referring to are better known otherwise
-
->Note: A key point here is to use whatever that is easily understood by other people.
-
-
-Apart from its name and its type, the scope of a variable is its most important feature. Indicating class scope by using underscore makes it easy to distinguish class variables from local scratch variables. This is important because class variables are considered to have higher significance than method variables, and should be treated with special care by the programmer.
-
-A side effect of the underscore naming convention is that it nicely resolves the problem of finding reasonable variable names for setter methods:
-
-```java
-void setName(String name) {
-    name_ = name;
-}
-```
 
 **7. :star: All names should be written in English.**
 
@@ -118,15 +99,17 @@ English is the preferred language for international development.
 
 Scratch variables used for temporary storage or indices are best kept short. A programmer reading such variables should be able to assume that its value is not used outside a few lines of code. Common scratch variables for integers are `i, j, k, m, n` and for characters `c` and `d`.
 
-**9. :star: Boolean variables should be prefixed with ‘is’**
+**9. :star: Boolean variables/methods should be named to sound like booleans ‘is’**
 
 ```java
-isSet, isVisible, isFinished, isFound, isOpen
+//variables
+isSet, isVisible, isFinished, isFound, isOpen, hasData, wasOpen
+
+//methods
+boolean hasLicense();
+boolean canEvaluate();
+boolean shouldAbort = false;
 ```
-
-This is the naming convention for boolean methods and variables used by Sun for the Java core packages.
-
-Using the is prefix solves a common problem of choosing bad boolean names like *status* or *flag*. `isStatus` or `isFlag` simply doesn't fit, and the programmer is forced to chose more meaningful names.
 
 Setter methods for boolean variables must have set prefix as in:
 
@@ -134,15 +117,7 @@ Setter methods for boolean variables must have set prefix as in:
 void setFound(boolean isFound);
 ```
 
-There are a few alternatives to the is prefix that fits better in some situations. These are *has*, *can* and *should* prefixes:
-
-```java
-boolean hasLicense();
-boolean canEvaluate();
-boolean shouldAbort = false;
-```
-
->Note: Avoid boolean variables that represent the negation of a thing. e.g., use `isInitialized` instead of `isNotInitialized`
+>Rationale: This is the naming convention for boolean methods and variables used by Java core packages. It also makes the code read like normal English e.g. `if(isOpen) ...`
 
 **10. :star::star: Plural form should be used on names representing a collection of objects.**
 
@@ -151,9 +126,11 @@ Collection<Point> points;
 int[] values;
 ```
 
-Enhances readability since the name gives the user an immediate clue of the type of the variable and the operations that can be performed on its elements. One space character after the variable type is enough to obtain clarity.
+>Rationale: Enhances readability since the name gives the user an immediate clue of the type of the variable and the operations that can be performed on its elements. One space character after the variable type is enough to obtain clarity.
 
-**11. :star: Iterator variables should be called *i*, *j*, *k* etc.**
+**11. :star: Iterator variables can be called *i*, *j*, *k* etc.**
+
+Variables named *j*, *k* etc. should be used for nested loops only.
 
 ```java
 for (Iterator i = points.iterator(); i.hasNext(); ) {
@@ -165,7 +142,7 @@ for (int i = 0; i < nTables; i++) {
 }
 ```
 
-The notation is taken from mathematics where it is an established convention for indicating iterators. Variables named *j*, *k* etc. should be used for nested loops only.
+>Rationale: The notation is taken from mathematics where it is an established convention for indicating iterators. 
 
 **12. :star::star: Associated constants (final variables) should be prefixed by a common type name.**
 
@@ -175,16 +152,25 @@ final int COLOR_GREEN = 2;
 final int COLOR_BLUE  = 3;
 ```
 
-This indicates that the constants belong together, and what concept the constants represents.
+>Rationale: This indicates that the constants belong together, and make them appear together when sorted alphabetically.
 
 ## **Layout**
 
+**1. :star: Basic indentation should be 4 spaces (not tabs).**
 
-**1. :star: Keep lines no longer than 120 chars.**
+```java
+for (i = 0; i < nElements; i++) {
+    a[i] = 0;
+}
+```
 
-Length: Try to keep line length shorter than 110 characters (soft limit). But it is OK to exceed the limit slightly (hard limit: 120 chars). If the line exceeds the limit, use line wrapping at appropriate places of the line.
+>Rationale: Just follow it :trollface:
 
-Indentation for wrapped lines should be 8 spaces (i.e. twice the normal indentation of 4 spaces) more than the parent line.
+**2. :star: Keep lines no longer than 120 chars.**
+
+Try to keep line length shorter than 110 characters (soft limit). But it is OK to exceed the limit slightly (hard limit: 120 chars). If the line exceeds the limit, use line wrapping at appropriate places of the line.
+
+**Indentation for wrapped lines should be 8 spaces** (i.e. twice the normal indentation of 4 spaces) more than the parent line.
 
 ```java
 setText("Long line split"
@@ -195,7 +181,7 @@ if(isReady){
 }
 ``` 
 
-**2. :star::star: Place line break to improve readability**
+**3. :star::star: Place line break to improve readability**
 
 When wrapping lines, the main objective is to improve readability. Do not always accept the auto-formatting suggested by the IDE.
 
@@ -272,17 +258,9 @@ alpha = (aLongBooleanExpression)
         ? beta
         : gamma;
 ```
-## **Layout**
 
-**1. Basic indentation should be 4 spaces (not tabs).**
 
-```java
-for (i = 0; i < nElements; i++) {
-    a[i] = 0;
-}
-```
-
-**2. :star: Use K&R style brackets (aka [Egyptian style](https://blog.codinghorror.com/new-programming-jargon/)).**
+**4. :star: Use K&R style brackets (aka [Egyptian style](https://blog.codinghorror.com/new-programming-jargon/)).**
 
 <table>
   <tr>
@@ -308,9 +286,9 @@ while (!done)
   </tr>
 </table>
 
->Rationale: Just follow it. No need for a reason. :trollface:
+>Rationale: Just follow it. :trollface:
 
-**3. Method definitions should have the following form:**
+**5. :star: Method definitions should have the following form:**
 
 ```java
 public void someMethod() throws SomeException {
@@ -318,7 +296,7 @@ public void someMethod() throws SomeException {
 }
 ```
 
-**4. :star: The _if-else_ class of statements should have the following form:**
+**6. :star: The _if-else_ class of statements should have the following form:**
 
 ```java
 if (condition) {
@@ -340,7 +318,7 @@ if (condition) {
 }
 ```
 
-**5. :star: The _for_ statement should have the following form:**
+**7. :star: The _for_ statement should have the following form:**
 
 ```java
 for (initialization; condition; update) {
@@ -348,7 +326,7 @@ for (initialization; condition; update) {
 }
 ```
 
-**6. The _while_ statement should have the following form:**
+**8. :star: The _while_ statement should have the following form:**
 
 ```java
 while (condition) {
@@ -356,7 +334,7 @@ while (condition) {
 }
 ```
 
-**7. :star: The _do-while_ statement should have the following form:**
+**9. :star: The _do-while_ statement should have the following form:**
 
 ```java
 do {
@@ -364,7 +342,7 @@ do {
 } while (condition);
 ```
 
-**8. :star: The _switch_ statement should have the following form:**
+**10. :star: The _switch_ statement should have the following form:**
 
 ```java
 switch (condition) {
@@ -387,7 +365,7 @@ The explicit `//Fallthrough` comment should be included whenever there is a `cas
 
 >Leaving out the `break` is a common error, and it must be made clear that it is intentional when it is not there.
 
-**9. :star: A _try-catch_ statement should have the following form:**
+**11. :star: A _try-catch_ statement should have the following form:**
 
 ```java
 try {
@@ -405,7 +383,7 @@ try {
 }
 ```
 
-**10. :star::star: White space within a statement**
+**12. :star::star: White space within a statement**
 
 It is difficult to give a complete list of the suggested use of whitespace in Java code. The examples below however should give a general idea of the intentions.
 
@@ -452,7 +430,7 @@ doSomething(a,b,c,d);</pre>
   </tr>
   <tr>
     <td>
-      Colons should be surrounded by white space when used as a binary/ternary operator. Does not apply to `switch x:`.<br>
+      Colons should be surrounded by white space when used as a binary/ternary operator. Does not apply to <code>switch x:</code>.<br>
       Semicolons in for statements should be followed by a space character.
     </td>
     <td>
@@ -468,7 +446,7 @@ for(i=0;i<10;i++){</pre>
 
 Makes the individual components of the statements stand out and enhances readability. 
 
-**11. :star::star: Logical units within a block should be separated by one blank line.**
+**13. :star::star: Logical units within a block should be separated by one blank line.**
 
 ```java
 // Create a new identity matrix
@@ -493,9 +471,11 @@ Enhances readability by introducing white space between logical units. Each bloc
 
 ### **Package and Import Statements**
 
-**1a. Put every class in a package.**
+**1a. :star: Put every class in a package.**
 
-Every class is part of some package. You can use packages to organise your code. It will help you and other developers easily understand the code base when all the classes have been grouped in packages. 
+Every class should be part of some package. 
+
+>Rationale: It will help you and other developers easily understand the code base when all the classes have been grouped in packages. 
 
 **1b. :star::star::star: Put related classes in a single package.**
 
@@ -503,14 +483,8 @@ Package together the classes that are related. For example in Java, the classes 
 
 **2. :star::star: The ordering of import statements must be consistent.**
 
-A consistent ordering of import statements makes it easier to browse the list and determine the dependencies when there are many imports.
+>Rationale: A consistent ordering of import statements makes it easier to browse the list and determine the dependencies when there are many imports.
 
-Major IDEs (e.g. Eclipse and IntelliJ IDEA) have built-in formatters to order the imports. For example, Eclipse uses this default ordering:
-
-- group of static imports is on the top
-- groups of non-static imports: "java" and "javax" packages first, then "org" and "com", then all other imports as one group
-- imports are sorted alphabetically in the groups
-- groups are separated by one blank line
 
 Example:
 
@@ -534,7 +508,7 @@ import javafx.geometry.Point2D;
 import junit.framework.AssertionFailedError;
 ```
 
->*Hint: IDEs have support for auto-ordering import statements.* However, note that the default orderings of different IDEs are not always the same. It is recommended that you and your team use the same IDE and stick to a consistent ordering.
+>*Tip: IDEs have support for auto-ordering import statements.* However, note that the default orderings of different IDEs are not always the same. It is recommended that you and your team use the same IDE and stick to a consistent ordering.
 
 **3. :star: Imported classes should always be listed explicitly.**
 
@@ -743,7 +717,7 @@ for (i = 0, sum = 0; i < 100; i++)
 
 ### **Conditionals**
 
-**11. The conditional should be put on a separate line.**
+**11. :star: The conditional should be put on a separate line.**
 
 <table>
   <tr>
