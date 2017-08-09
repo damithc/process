@@ -9,10 +9,8 @@ Categories of style rules:
 * **Intermediate Rules**: Marked with :star::star:
 * **Advanced Rules**: Marked with :star::star::star:
 
-- [Naming Conventions](#naming-conventions)
-  - [General Naming Conventions](#general-naming-conventions)
-  - [Specific Naming Conventions](#specific-naming-conventions)
-- [Files](#files)
+- [Naming](#naming-conventions)
+- [Layout](#layout)
 - [Statements](#statements)
   - [Package and Import Statements](#package-and-import-statements)
   - [Classes and Interfaces](#classes-and-interfaces)
@@ -21,15 +19,11 @@ Categories of style rules:
   - [Variables](#variables)
   - [Loops](#loops)
   - [Conditionals](#conditionals)
-- [Layout and Comments](#layout-and-comments)
-  - [Layout](#layout)
-  - [White Space](#white-space)
-  - [Comments](#comments)
+- [Comments](#comments)
 - [References](#references)
 
 ## **Naming Conventions**
 
-### **General Naming Conventions**
 
 **1. :star: Names representing packages should be in all lower case.**
 
@@ -43,25 +37,25 @@ However, for your projects, the root name of the package should be your group na
 
 >Note: Your code is not officially ‘*produced by NUS*’, therefore do not use `edu.nus.comp.*` or anything similar.
 
-**2. Names representing classes or enum types must be nouns and written in mixed case starting with upper case.**
+**2. :star: Names representing classes or enum types must be nouns and written in mixed case starting with upper case.**
 
 ```java
 Line, AudioSystem
 ```
  
-**3. Variable names must be in mixed case starting with lower case.**
+**3. :star: Variable names must be in mixed case starting with lower case.**
 
 ```java
 line, audioSystem
 ```
 
-**4. Names representing constants (final variables) or enum constants must be all uppercase using underscore to separate words.**
+**4. :star: Names representing constants (final variables) or enum constants must be all uppercase using underscore to separate words.**
 
 ```java
 MAX_ITERATIONS, COLOR_RED
 ```
 
-**5. Names representing methods must be verbs and written in mixed case starting with lower case.**
+**5. :star: Names representing methods must be verbs and written in mixed case starting with lower case.**
 
 ```java
 getName(), computeTotalWidth()
@@ -76,7 +70,7 @@ Third part or both second and third parts can be omitted depending on what's cov
 For example, the test method `sortList_emptyList()` will test `sortList()` method for all variations of the 'empty list' 
 scenario and the test method `sortList()` will test the `sortList()` method for all scenarios.
 
-**6. Abbreviations and acronyms should not be uppercase when used as a (OR part of a) name.**
+**6. :star::star: Abbreviations and acronyms should not be uppercase when used as a (OR part of a) name.**
 
 <table>
   <tr>
@@ -105,14 +99,6 @@ As a result, minimize usage of abbreviations/acronyms, unless the concepts they 
 
 >Note: A key point here is to use whatever that is easily understood by other people.
 
-**7. Private class variables can have underscore suffix or prefix (not common, but a beneficial practice)**
-
-```java
-class Person {
-    private String name_; // OR private String _name;
-    ...
-}
-```
 
 Apart from its name and its type, the scope of a variable is its most important feature. Indicating class scope by using underscore makes it easy to distinguish class variables from local scratch variables. This is important because class variables are considered to have higher significance than method variables, and should be treated with special care by the programmer.
 
@@ -124,17 +110,15 @@ void setName(String name) {
 }
 ```
 
-**8. All names should be written in English.**
+**7. :star: All names should be written in English.**
 
 English is the preferred language for international development.
 
-**9. Variables with a large scope should have long names, variables with a small scope can have short names.**
+**8. :star::star: Variables with a large scope should have long names, variables with a small scope can have short names.**
 
 Scratch variables used for temporary storage or indices are best kept short. A programmer reading such variables should be able to assume that its value is not used outside a few lines of code. Common scratch variables for integers are `i, j, k, m, n` and for characters `c` and `d`.
 
-### **Specific Naming Conventions**
-
-**10. Boolean variables should be prefixed with ‘is’**
+**9. :star: Boolean variables should be prefixed with ‘is’**
 
 ```java
 isSet, isVisible, isFinished, isFound, isOpen
@@ -160,7 +144,7 @@ boolean shouldAbort = false;
 
 >Note: Avoid boolean variables that represent the negation of a thing. e.g., use `isInitialized` instead of `isNotInitialized`
 
-**11. Plural form should be used on names representing a collection of objects.**
+**10. :star::star: Plural form should be used on names representing a collection of objects.**
 
 ```java
 Collection<Point> points;
@@ -169,7 +153,7 @@ int[] values;
 
 Enhances readability since the name gives the user an immediate clue of the type of the variable and the operations that can be performed on its elements. One space character after the variable type is enough to obtain clarity.
 
-**12. Iterator variables should be called *i*, *j*, *k* etc.**
+**11. :star: Iterator variables should be called *i*, *j*, *k* etc.**
 
 ```java
 for (Iterator i = points.iterator(); i.hasNext(); ) {
@@ -183,7 +167,7 @@ for (int i = 0; i < nTables; i++) {
 
 The notation is taken from mathematics where it is an established convention for indicating iterators. Variables named *j*, *k* etc. should be used for nested loops only.
 
-**13. Associated constants (final variables) should be prefixed by a common type name.**
+**12. :star::star: Associated constants (final variables) should be prefixed by a common type name.**
 
 ```java
 final int COLOR_RED   = 1;
@@ -193,50 +177,31 @@ final int COLOR_BLUE  = 3;
 
 This indicates that the constants belong together, and what concept the constants represents.
 
-## **Files**
+## **Layout**
 
-**1. Java source files should have the extension .java.**
 
-```java
-Point.java
-```
+**1. :star: Keep lines no longer than 120 chars.**
 
-Enforced by the Java tools.
+Length: Try to keep line length shorter than 110 characters (soft limit). But it is OK to exceed the limit slightly (hard limit: 120 chars). If the line exceeds the limit, use line wrapping at appropriate places of the line.
 
-**2. Classes should be declared in individual files with the file name matching the class name. Secondary private classes can be declared as inner classes and reside in the file of the class they belong to.**
+Indentation for wrapped lines should be 8 spaces (i.e. twice the normal indentation of 4 spaces) more than the parent line.
 
 ```java
-class NusStudent extends Student {
-    //Logic related to NusStudent class
-    private class Module {
-        //Logic related to Module class
-    }
+setText("Long line split"
+        + "into two parts.");
+if(isReady){
+    setText("Long line split"
+            + "into two parts.");
 }
-```
-Enforced by the Java tools.
+``` 
 
-**3. Use line wrapping to improve readability.**
+**2. :star::star: Place line break to improve readability**
 
-When wrapping lines, the main objective is to improve readability. Feel free to break rules if it improves readability. Do not always accept the auto-formatting suggested by the IDE.
-
-Length: A line should be split if it exceeds the 110 characters. But it is OK to exceed the limit slightly or wrap the lines much shorter than limit.
-
-*Where to insert the break?*
+When wrapping lines, the main objective is to improve readability. Do not always accept the auto-formatting suggested by the IDE.
 
 In general:
 
 - Break after a comma. 
-
-- Align the new line with the beginning of the parent element.
-
-```java
-method(param1, param2,
-       param3, param4);
-method(param1,
-       method(param2,
-              param3),
-       param3);
-```
 
 - Break before an operator. This also applies to the following "*operator-like*" symbols: the dot separator `.`, the ampersand in type bounds `<T extends Foo & Bar>`, and the pipe in catch blocks `catch (FooException | BarException e)`
 
@@ -285,7 +250,7 @@ someMethodWithVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongName
       <pre lang="java">
 // PREFER THIS
 longName1 = longName2 * (longName3 + longName4 - longName5)
-            + 4 * longname6;</pre>
+        + 4 * longname6;</pre>
     </td> 
   <tr>
     <th align="center">Bad</th>
@@ -294,104 +259,249 @@ longName1 = longName2 * (longName3 + longName4 - longName5)
       <pre lang="java">
 // OVER THIS
 longName1 = longName2 * (longName3 + longName4
-            - longName5) + 4 * longname6;</pre>
+        - longName5) + 4 * longname6;</pre>
     </td>
   </tr>
 </table>
 
-- Single-column stacking of parameters or exceptions is discouraged in most cases, unless the column is wide enough. While such stacking improves the list of parameters/exceptions, it may not outweigh the cost of increased height of the code.
-
-<table>
-  <tr>
-    <th align="center">Good</th>
-  </tr>
-  <tr>
-    <td>
-      <pre lang="java">
-//BECAUSE THE COLUMN IS WIDE
-longMethod(someLongMenthod1(param1, param2, param3).anotherMethod(),
-           someLongMenthod2(param1, param2).anotherMethod(),
-           someLongMenthod3(param1, param2, param3));</pre>
-    </td> 
-  <tr>
-    <th align="center">Bad</th>
-  </tr>
-    <td>
-      <pre lang="java">
-method(param1,
-       param2,
-       param3,
-       param4);
-void method(param1,param2)throws Exception1,
-                                 Exception2,
-                                 Exception3 {</pre>
-    </td>
-  </tr>
-</table>
-
-- Here are three acceptable ways to format ternary expressions:
+- Here are two acceptable ways to format ternary expressions:
 
 ```java
 alpha = (aLongBooleanExpression) ? beta : gamma;
-alpha = (aLongBooleanExpression) ? beta
-                                 : gamma;
 alpha = (aLongBooleanExpression)
-      ? beta
-      : gamma;
+        ? beta
+        : gamma;
+```
+## **Layout**
+
+**1. Basic indentation should be 4 spaces (not tabs).**
+
+```java
+for (i = 0; i < nElements; i++) {
+    a[i] = 0;
+}
 ```
 
-- If the above rules lead to confusing code or to code that’s squished up against the right margin, just indent 8 spaces instead.
+**2. :star: Use K&R style brackets (aka [Egyptian style](https://blog.codinghorror.com/new-programming-jargon/)).**
 
 <table>
   <tr>
     <th align="center">Good</th>
-  </tr>
-  <tr>
-    <td>
-      <pre lang="java">
-//INDENT 8 SPACES TO AVOID VERY DEEP INDENTS
-private static synchronized horkingLongMethodName(int arg, Object anotherArg,
-        String yetAnotherArg, Object andStillAnother) {
-    ...
-}</pre>
-    </td> 
-  <tr>
-  <tr>
-    <td>
-      <pre lang="java">
-//EVEN THIS IS ACCEPTABLE (2nd line starts to the right of method name)
-private static synchronized horkingLongMethodName(int arg, Object anotherArg,
-                                String yetAnotherArg, Object andStillAnother) {
-    ...
-}</pre>
-    </td> 
-  <tr>
     <th align="center">Bad</th>
   </tr>
+  <tr>
     <td>
       <pre lang="java">
-//CONVENTIONAL INDENTATION (code getting squished up against the right)
-void someMethodWithVeryVeryVeryVeryVeryVeryLongName(int arg, 
-                                                   Object anotherArg, 
-                                                   String yetAnotherArg,
-                                                   Object andStillAnother) {
-    ...
+while (!done) {
+    doSomething();
+    done = moreToDo();
+}</pre>
+    </td>
+    <td>
+      <pre lang="java">
+while (!done)
+{
+    doSomething();
+    done = moreToDo();
 }</pre>
     </td>
   </tr>
 </table>
+
+>Rationale: Just follow it. No need for a reason. :trollface:
+
+**3. Method definitions should have the following form:**
+
+```java
+public void someMethod() throws SomeException {
+    ...
+}
+```
+
+**4. :star: The _if-else_ class of statements should have the following form:**
+
+```java
+if (condition) {
+    statements;
+}
+
+if (condition) {
+    statements;
+} else {
+    statements;
+}
+
+if (condition) {
+    statements;
+} else if (condition) {
+    statements;
+} else {
+    statements;
+}
+```
+
+**5. :star: The _for_ statement should have the following form:**
+
+```java
+for (initialization; condition; update) {
+    statements;
+}
+```
+
+**6. The _while_ statement should have the following form:**
+
+```java
+while (condition) {
+    statements;
+}
+```
+
+**7. :star: The _do-while_ statement should have the following form:**
+
+```java
+do {
+    statements;
+} while (condition);
+```
+
+**8. :star: The _switch_ statement should have the following form:**
+
+```java
+switch (condition) {
+case ABC:
+    statements;
+    // Fallthrough
+case DEF:
+    statements;
+    break;
+case XYZ:
+    statements;
+    break;
+default:
+    statements;
+    break;
+}
+```
+
+The explicit `//Fallthrough` comment should be included whenever there is a `case` statement without a break statement. 
+
+>Leaving out the `break` is a common error, and it must be made clear that it is intentional when it is not there.
+
+**9. :star: A _try-catch_ statement should have the following form:**
+
+```java
+try {
+    statements;
+} catch (Exception exception) {
+    statements;
+}
+
+try {
+    statements;
+} catch (Exception exception) {
+    statements;
+} finally {
+    statements;
+}
+```
+
+**10. :star::star: White space within a statement**
+
+It is difficult to give a complete list of the suggested use of whitespace in Java code. The examples below however should give a general idea of the intentions.
+
+<td></td>
+
+<table>
+  <tr>
+    <th>Rule</th>
+    <th align="center">Good</th>
+    <th align="center">Bad</th>
+  </tr>
+  <tr>
+    <td>Operators should be surrounded by a space character.</td>
+    <td>
+      <pre lang="java">
+a = (b + c) * d;</pre>
+    </td>
+    <td>
+      <pre lang="java">
+a=(b+c)*d;</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Java reserved words should be followed by a white space.</td>
+    <td>
+      <pre lang="java">
+while (true) {</pre>
+    </td>
+    <td>
+      <pre lang="java">
+while(true){</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Commas should be followed by a white space.</td>
+    <td>
+      <pre lang="java">
+doSomething(a, b, c, d);</pre>
+    </td>
+    <td>
+      <pre lang="java">
+doSomething(a,b,c,d);</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Colons should be surrounded by white space when used as a binary/ternary operator. Does not apply to `switch x:`.<br>
+      Semicolons in for statements should be followed by a space character.
+    </td>
+    <td>
+      <pre lang="java">
+for (i = 0; i < 10; i++) {</pre>
+    </td>
+    <td>
+      <pre lang="java">
+for(i=0;i<10;i++){</pre>
+    </td>
+  </tr>
+</table>
+
+Makes the individual components of the statements stand out and enhances readability. 
+
+**11. :star::star: Logical units within a block should be separated by one blank line.**
+
+```java
+// Create a new identity matrix
+Matrix4x4 matrix = new Matrix4x4();
+
+// Precompute angles for efficiency
+double cosAngle = Math.cos(angle);
+double sinAngle = Math.sin(angle);
+
+// Specify matrix as a rotation transformation
+matrix.setElement(1, 1,  cosAngle);
+matrix.setElement(1, 2,  sinAngle);
+matrix.setElement(2, 1, -sinAngle);
+matrix.setElement(2, 2,  cosAngle);
+
+// Apply rotation
+transformation.multiply(matrix);
+```
+Enhances readability by introducing white space between logical units. Each block is often introduced by a comment as indicated in the example above.
 
 ## **Statements**
 
 ### **Package and Import Statements**
 
-**1. The package statement must be the first statement of the file. All files should belong to a specific package.**
+**1a. Put every class in a package.**
 
-The package statement location is enforced by the Java language. A Java package is a set of classes which are grouped together. Every class is part of some package. You can use packages to organise your code. It will help you and other developers easily understand the code base when all the classes have been grouped in packages. 
+Every class is part of some package. You can use packages to organise your code. It will help you and other developers easily understand the code base when all the classes have been grouped in packages. 
 
-The rule of thumb is to package the classes that are related. For example in Java, the classes related to file writing is grouped in the package `java.io` and the classes which handle lists, maps etc are grouped in `java.util` package.
+**1b. :star::star::star: Put related classes in a single package.**
 
-**2. The ordering of import statements must be consistent.**
+Package together the classes that are related. For example in Java, the classes related to file writing is grouped in the package `java.io` and the classes which handle lists, maps etc are grouped in `java.util` package.
+
+**2. :star::star: The ordering of import statements must be consistent.**
 
 A consistent ordering of import statements makes it easier to browse the list and determine the dependencies when there are many imports.
 
@@ -402,7 +512,7 @@ Major IDEs (e.g. Eclipse and IntelliJ IDEA) have built-in formatters to order th
 - imports are sorted alphabetically in the groups
 - groups are separated by one blank line
 
-Below is an example of imports organised in Eclipse:
+Example:
 
 ```java
 import static org.junit.Assert.assertEquals;
@@ -424,11 +534,9 @@ import javafx.geometry.Point2D;
 import junit.framework.AssertionFailedError;
 ```
 
->*Hint: You can organise the imports automatically by simply pressing CTRL+SHIFT+O in Eclipse.*
+>*Hint: IDEs have support for auto-ordering import statements.* However, note that the default orderings of different IDEs are not always the same. It is recommended that you and your team use the same IDE and stick to a consistent ordering.
 
-However, note that the default orderings of different IDEs are not always the same. It is recommended that you and your team use the same IDE and stick to a consistent ordering.
-
-**3. Imported classes should always be listed explicitly.**
+**3. :star: Imported classes should always be listed explicitly.**
 
 <table>
   <tr>
@@ -449,23 +557,24 @@ import java.util.*;</pre>
   </tr>
 </table>
 
-Importing classes explicitly gives an excellent documentation value for the class at hand and makes the class easier to comprehend and maintain. Appropriate tools should be used in order to always keep the import list minimal and up to date. For example, Eclipse IDE can do this easily.
+>Rationale: Importing classes explicitly gives an excellent documentation value for the class at hand and makes the class easier to comprehend and maintain. Appropriate tools should be used in order to always keep the import list minimal and up to date. IDE's can be configured to do this easily.
 
 ### **Classes and Interfaces**
 
-**4. Class and Interface declarations should be organized in the following manner:**
+**4. :star::star::star: Class and Interface declarations should be organized in the following manner:**
 
->1. Class/Interface documentation (Comments)
->2. **class** or **interface** statement
->3. Class (static) variables in the order **public**, **protected**, **package** (no access modifier), **private**
->4. Instance variables in the order **public**, **protected**, **package** (no access modifier), **private**
->5. Constructors
->6. Methods (no specific order)
+  1. Class/Interface documentation (Comments)
+  2. **class** or **interface** statement
+  3. Class (static) variables in the order **public**, **protected**, **package** (no access modifier), **private**
+  4. Instance variables in the order **public**, **protected**, **package** (no access modifier), **private**
+  5. Constructors
+  6. Methods (no specific order)
 
-Make code easy to navigate by making the location of each class element predictable.
-Methods
+>Rationale: Make code easy to navigate by making the location of each class element predictable.
 
-**5. Method modifiers should be given in the following order:** 
+### **Methods**
+
+**5. :star::star::star: Method modifiers should be given in the following order:** 
 
 `<access> static abstract synchronized <unusual> final native`
 
@@ -493,11 +602,11 @@ static public double square(double a);</pre>
 <unusual> = volatile | transient 
 ```
 
-The most important lesson here is to keep the *access* modifier as the first modifier. Of the possible modifiers, this is by far the most important, and it must stand out in the method declaration. For the other modifiers, the order is less important, but it make sense to have a fixed convention.
+>Rationale: The most important lesson here is to keep the *access* modifier as the first modifier. Of the possible modifiers, For the other modifiers, the order is less important, but it make sense to have a fixed convention.
 
 ### **Types**
 
-**6. Array specifiers must be attached to the type not the variable.**
+**6. :star: Array specifiers must be attached to the type not the variable.**
 
 <table>
   <tr>
@@ -516,11 +625,11 @@ int a[] = new int[20];</pre>
   </tr>
 </table>
 
-The *arrayness* is a feature of the base type, not the variable. Sun allows both forms however.
+>Rationale: The *arrayness* is a feature of the base type, not the variable. Java allows both forms however.
 
 ### **Variables**
 
-**7. Variables should be initialized where they are declared and they should be declared in the smallest scope possible.**
+**7. :star::star: Variables should be initialized where they are declared and they should be declared in the smallest scope possible.**
 
 <table>
   <tr>
@@ -550,15 +659,30 @@ for (i = 0; i < 10; i++) {
   </tr>
 </table>
 
-This ensures that variables are valid at any time. Sometimes it is impossible to initialize a variable to a valid value where it is declared. In these cases it should be left uninitialized rather than initialized to some phony value.
+>Rationale: This ensures that variables are valid at any time. Sometimes it is impossible to initialize a variable to a valid value where it is declared. In these cases it should be left uninitialized rather than initialized to some phony value.
 
-**8. Class variables should never be declared public.**
+**8. :star::star: Class variables should never be declared public.**
 
-The concept of Java information hiding and encapsulation is violated by public variables. Use private variables and access functions instead. One exception to this rule is when the class is essentially a data structure, with no behavior (*equivalent to a C++ struct*). In this case it is appropriate to make the class' instance variables public.
+<table>
+  <tr>
+    <th align="center">Bad</th>
+  </tr>
+  <tr>
+    <td>
+      <pre lang="java">
+public class Foo{
 
-**9. Avoid unnecessary use of `this` with fields.**
+    public int bar;
 
-Java provides a reference to any member of the current object from within an instance method or a constructor by using `this`.
+}
+      </pre>
+    </td>
+  </tr>
+</table>
+
+>Rationale: The concept of Java information hiding and encapsulation is violated by public variables. Use private variables and access functions instead. One exception to this rule is when the class is essentially a data structure, with no behavior (*equivalent to a C++ struct*). In this case it is appropriate to make the class' instance variables public.
+
+**9. :star::star::star: Avoid unnecessary use of `this` with fields.**
 
 Use the `this` keyword only when a field is shadowed by a method or constructor parameter.
 
@@ -588,9 +712,11 @@ public User(String name) {
   </tr>
 </table>
 
+>Rationale: to reduce unnecessary noise.
+
 ### **Loops**
 
-**10. The loop body should be wrapped by curly brackets irrespective of how many lines there are in the body.**
+**10. :star: The loop body should be wrapped by curly brackets irrespective of how many lines there are in the body.**
 
 <table>
   <tr>
@@ -613,7 +739,7 @@ for (i = 0, sum = 0; i < 100; i++)
   </tr>
 </table>
 
-When there is only one statement in the loop body it can be written without wrapping it between `{ }`, however that is error prone and *very* strongly discouraged from using.
+>Rationale: When there is only one statement in the loop body it can be written without wrapping it between `{ }`, however that is error prone and *very* strongly discouraged from using.
 
 ### **Conditionals**
 
@@ -638,9 +764,9 @@ if (isDone) doCleanup();</pre>
   </tr>
 </table>
 
-This is for debugging purposes. When writing on a single line, it is not apparent whether the test is really true or not.
+>Rationale: This is for debugging purposes. When writing on a single line, it is not apparent whether the test is really true or not.
 
-**12. Single statement conditionals should still be wrapped by curly brackets.**
+**12. :star: Single statement conditionals should still be wrapped by curly brackets.**
 
 <table>
   <tr>
@@ -666,247 +792,28 @@ if (stream != null))
 
 The body of the conditional should be wrapped by curly brackets irrespective of how many statements are in it to avoid error prone code.
 
-## **Layout and Comments**
->Note: Many of the layout rules mentioned below can be applied in Eclipse by simply pressing *CTRL+SHIFT+F* (F for Format). If you want to format only a specific part of the code instead of the whole class, highlight the lines you want to format and then press *CTRL+SHIFT+F*. The Eclipse formatter will **not** work properly if you have intentionally pressed *enter/tab/space* keys in unwanted places. Therefore, even if you do use the Eclipse formatter, we highly recommend that you **double check** whether your code is in accordance with the rules mentioned below.
 
->Note: Another option is to use the Correct Indentation function found in Eclipse. This can be accessed by clicking `Source -> Correct Indentation (Ctrl-I)` . This function will merely indent the code instead of formatting it as compared with the Format function above.
-
-### **Layout**
-
-**1. Basic indentation should be 4 spaces.**
-
-```java
-for (i = 0; i < nElements; i++) {
-    a[i] = 0;
-}
-```
-
-Indentation is used to emphasize the logical structure of the code. Use 4 spaces to indent (not tabs).
-
-Place the line breaks to improve readability. It is ok to exceed 110 char limit for a line, but not by too much. You can configure Eclipse to break lines after 110 chars, but sometimes the automatic line break does not give readability. In such cases, you can decide where to put the line break to have best readability.
-
-**2. Block layout should be as illustrated as shown below.**
-
-<table>
-  <tr>
-    <th align="center">Good</th>
-    <th align="center">Bad</th>
-  </tr>
-  <tr>
-    <td>
-      <pre lang="java">
-while (!done) {
-    doSomething();
-    done = moreToDo();
-}</pre>
-    </td>
-    <td>
-      <pre lang="java">
-while (!done)
-    {
-        doSomething();
-        done = moreToDo();
-    }</pre>
-    </td>
-  </tr>
-</table>
-
-The Bad example introduces an extra indentation level which doesn't emphasize the logical structure of the code as clearly as the Good example.
-
-**3. Method definitions should have the following form:**
-
-```java
-public void someMethod() throws SomeException {
-    ...
-}
-```
-
-**4. The _if-else_ class of statements should have the following form:**
-
-```java
-if (condition) {
-    statements;
-}
-
-if (condition) {
-    statements;
-} else {
-    statements;
-}
-
-if (condition) {
-    statements;
-} else if (condition) {
-    statements;
-} else {
-    statements;
-}
-```
-
-**5. The _for_ statement should have the following form:**
-
-```java
-for (initialization; condition; update) {
-    statements;
-}
-```
-
-This follows from the general block rule above.
-
-**6. The _while_ statement should have the following form:**
-
-```java
-while (condition) {
-    statements;
-}
-```
-
-This follows from the general block rule above.
-
-**7. The _do-while_ statement should have the following form:**
-
-```java
-do {
-    statements;
-} while (condition);
-```
-
-This follows from the general block rule above.
-
-**8. The _switch_ statement should have the following form:**
-
-```java
-switch (condition) {
-case ABC:
-    statements;
-    // Fallthrough
-case DEF:
-    statements;
-    break;
-case XYZ:
-    statements;
-    break;
-default:
-    statements;
-    break;
-}
-```
-
-The explicit `//Fallthrough` comment should be included whenever there is a `case` statement without a break statement. Leaving out the `break` is a common error, and it must be made clear that it is intentional when it is not there.
-
-**9. A _try-catch_ statement should have the following form:**
-
-```java
-try {
-    statements;
-} catch (Exception exception) {
-    statements;
-}
-
-try {
-    statements;
-} catch (Exception exception) {
-    statements;
-} finally {
-    statements;
-}
-```
-This follows partly from the general block rule above. This form differs from the Sun recommendation in the same way as the `if-else` statement described above.
-
-### **White Space**
-
-**10. Take note of the following:**
-
-> * Operators should be surrounded by a space character.
-> * Java reserved words should be followed by a white space.
-> * Commas should be followed by a white space.
-> * Colons should be surrounded by white space when used as a binary/ternary operator. Does not apply to `switch x:`.
-> * Semicolons in for statements should be followed by a space character.
-
-<table>
-  <tr>
-    <th align="center">Good</th>
-    <th align="center">Bad</th>
-  </tr>
-  <tr>
-    <td>
-      <pre lang="java">
-a = (b + c) * d;</pre>
-    </td>
-    <td>
-      <pre lang="java">
-a=(b+c)*d;</pre>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <pre lang="java">
-while (true) {</pre>
-    </td>
-    <td>
-      <pre lang="java">
-while(true){</pre>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <pre lang="java">
-doSomething(a, b, c, d);</pre>
-    </td>
-    <td>
-      <pre lang="java">
-doSomething(a,b,c,d);</pre>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <pre lang="java">
-for (i = 0; i < 10; i++) {</pre>
-    </td>
-    <td>
-      <pre lang="java">
-for(i=0;i<10;i++){</pre>
-    </td>
-  </tr>
-</table>
-
-Makes the individual components of the statements stand out and enhances readability. It is difficult to give a complete list of the suggested use of whitespace in Java code. The examples above however should give a general idea of the intentions.
-
-**11. Logical units within a block should be separated by one blank line.**
-
-```java
-// Create a new identity matrix
-Matrix4x4 matrix = new Matrix4x4();
-
-// Precompute angles for efficiency
-double cosAngle = Math.cos(angle);
-double sinAngle = Math.sin(angle);
-
-// Specify matrix as a rotation transformation
-matrix.setElement(1, 1,  cosAngle);
-matrix.setElement(1, 2,  sinAngle);
-matrix.setElement(2, 1, -sinAngle);
-matrix.setElement(2, 2,  cosAngle);
-
-// Apply rotation
-transformation.multiply(matrix);
-```
-Enhances readability by introducing white space between logical units. Each block is often introduced by a comment as indicated in the example above.
-
-### **Comments**
+## **Comments**
 
 
-**12. Write minimal but sufficient comments.**
+**2. :star: All comments should be written in English.**
 
-In general, the use of comments should be minimized by making the code self-documenting by appropriate name choices and an explicit logical structure.
+Furthermore, use American spelling and avoid local slang.
 
-However, you MUST write header comments for all classes, public methods, and all non-trivial private methods. The code, even if it is self-explanatory, can only tell the reader HOW the code works, not WHAT the code is supposed to do. 
+>Rationale: The code is meant for an international audience.
 
-**13. All comments should be written in English.**
+**1. :star::star: Write descriptive header comments for all public classes/methods.**
 
-In an international environment English is the preferred language.
+You MUST write header comments for all classes, public methods.
 
-**14. Javadoc comments should have the following form:**
+>Rationale: `public` method are meant to be used by others and the users should not be forced to read the code of the method to understand its exact behavior. The code, even if it is self-explanatory, can only tell the reader HOW the code works, not WHAT the code is supposed to do.
+
+**2. :star::star::star: All non-trivial private methods should carry header comments.**
+
+>Rationale: Writing header comments will hep novice programmers detect abstraction problems. e.g. If it is hard to describe the method succinctly, there is something wrong with the method abstraction.
+
+
+**3. :star::star: Javadoc comments should have the following form:**
 
 ```java
 /**
@@ -925,26 +832,25 @@ public double computeLocation(double x, double y, int zone)
 }
 ```
 
-A readable form is important because this type of documentation is typically read more often inside the code than it is as processed text.
-
 Note in particular:
->- The opening `/**` on a separate line
->- Write the first sentence as a short summary of the method, as Javadoc automatically places it in the method summary table (and index). See here (from [5]) for more info.
->- Subsequent `*` is aligned with the first one
->- Space after each `*`
->- Empty line between description and parameter section
->- Alignment of parameter descriptions
->- Punctuation behind each parameter description
->-No blank line between the documentation block and the method/class
+- The opening `/**` on a separate line
+- **Write the first sentence as a short summary of the method**, as Javadoc automatically places it in the method summary table (and index). 
+  - In method header comments, the first sentence should start in the form `Returns ...`, `Sends ...`, `Adds ...` (not `Return` or `Returnning` etc.)
+- Subsequent `*` is aligned with the first one
+- Space after each `*`
+- Empty line between description and parameter section
+- Alignment of parameter descriptions
+- Punctuation behind each parameter description
+-No blank line between the documentation block and the method/class
 
 Javadoc of class members can be specified on a single line as follows:
 
 ```java
 /** Number of connections to this database */
-private int nConnections;
+private int connectionCount;
 ```
 
-**15. Comments should be indented relative to their position in the code.**
+**4. :star: Comments should be indented relative to their position in the code.**
 
 <table>
   <tr>
@@ -977,7 +883,7 @@ while (true) {
   </tr>
 </table>
 
-This is to avoid the comments from breaking the logical structure of the program.
+>Rationale: This is to avoid the comments from breaking the logical structure of the program.
 
 ## References
 
