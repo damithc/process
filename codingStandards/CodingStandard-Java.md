@@ -3,6 +3,12 @@
 **Important**: Use the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) for any topics 
 not covered in this document.
 
+Categories of style rules:
+
+* **Basic Rules**: Marked with :star:
+* **Intermediate Rules**: Marked with :star::star:
+* **Advanced Rules**: Marked with :star::star::star:
+
 - [Naming Conventions](#naming-conventions)
   - [General Naming Conventions](#general-naming-conventions)
   - [Specific Naming Conventions](#specific-naming-conventions)
@@ -25,7 +31,7 @@ not covered in this document.
 
 ### **General Naming Conventions**
 
-**1. Names representing packages should be in all lower case.**
+**1. :star: Names representing packages should be in all lower case.**
 
 ```java
 com.company.application.ui
